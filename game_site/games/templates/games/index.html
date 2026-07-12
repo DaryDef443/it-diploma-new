@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Игровой портал</title>
+    <link rel="stylesheet" href="{% static 'games/lobby.css' %}">
+</head>
+<body>
+    <div class="main-container">
+        <h1 class="main-title">Игровой сервис</h1>
+    <p class="subtitle">Выбери игру</p>
+
+    <div class="game-grid">
+        <a href="{% url 'memory_game' %}" class="game-card">
+            <span class="name">Memory Match</span>
+            <span class="desc">Найди пары английских слов</span>
+        </a>
+        
+        <a href="{% url 'quiz' %}" class="game-card">
+            <span class="name">Quiz</span>
+            <span class="desc">Проверь свои знания!</span>
+        </a>
+
+        <a href="{% url 'kitchen_rush' %}" class="game-card">
+            <span class="name">Kitchen Rush</span>
+            <span class="desc">Собери заказы на английском.</span>
+        </a>
+    </div>
+    </div>
+</body>
+</html>

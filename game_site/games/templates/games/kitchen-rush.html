@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kitchen rush</title>
+    <link rel="stylesheet" href="{% static 'games/kitchen-rush/style.css' %}">
+</head>
+<body>
+    <div class="game-container">
+        <div class="top-panel">
+            <span>⏳<span id="timer">60</span>с</span>
+            <span>Счет: <span id="score">0</span></span>
+            <span id="lives">❤️❤️❤️</span>
+        </div>
+        <div class="order-bubble" id="orderBubble">
+            <div class="customer" id="customer">😊</div>
+            <div class="order-text" id="orderText"></div>
+            <div class="order-ingredients" id="orderIngredients"></div>
+        </div>
+
+        <div class="kitchen-area" id="kitchenArea">
+            
+        </div>
+
+        <div class="plate-area" id="plateArea">
+            <div class="plate" id="plate">
+                🍽️
+            <div class="plate-items" id="plateItems"></div>
+        </div>
+
+        <div class="progress-bar" id="progressBar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <button class="start-btn" id="startBtn">Старт</button>
+    </div>
+
+    <script src="{% static 'games/kitchen-rush/script.js' %}"></script>
+</body>
+</html>

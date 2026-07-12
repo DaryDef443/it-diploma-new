@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Memory Game</title>
+    <link rel="stylesheet" href="{% static 'games/memory-game/style.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Bubblegum+Sans&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div class="floating-background"></div>
+    <h1 class="game-title">Memory match 🧠</h1>
+    <div game-container>
+        <div class="game-board"></div>
+    </div>
+
+    <div id="score-panel">Score: <span id="score">0</span></div>
+
+    
+
+
+
+
+
+    <script src="{% static 'games/memory-game/script.js' %}"></script>
+</body>
+</html>

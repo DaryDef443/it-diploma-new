@@ -1,0 +1,84 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz</title>
+    <link rel="stylesheet" href="{% static 'games/quiz/style.css' %}?v=2">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <div class="start_btn"><button>Начать Quiz</button></div>
+    <div class="info_box">
+        <div class="info_title">
+            <span>Некоторые правила</span>
+        </div>
+        <div class="info_list">
+            <div class="info">1. У вас будет только <span>15 секунд</span> на каждый вопрос</div>
+            <div class="info">2. Выбрать ответ можно только один раз</div>
+            <div class="info">3. Вы не можете выбрать вариант по истечению времени</div>
+            <div class="info">4. Вы не можете закрыть Квиз во время игры</div>
+            <div class="info">5. Вы получаете очки на основе правильных ответов</div>
+        </div>
+        <div class="buttons">
+            <button class="quit">Выйти</button>
+            <button class="restart">Продолжить</button>
+        </div>
+    </div>
+
+    <div class="quiz_box">
+        <header>
+            <div class="title">Quiz</div>
+            <div class="timer">
+                <div class="timer_text">Time left</div>
+                <div class="timer_sec">15</div>
+            </div>
+            <div class="time_line"></div>
+        </header>
+        <section>
+            <div class="que_text">
+                <span>Как переводится слово 'dog'</span>
+            </div>
+            <div class="option_list">
+               <!--  <div class="option">
+                    <span>Собака</span>
+                    <div class="icon tick"><i class="fas fa-check"></i></div>
+                </div>
+                <div class="option">
+                    <span>Кошка</span>
+                    <div class="icon cross"><i class="fas fa-times"></i></div>
+                </div>
+                <div class="option">
+                    <span>Птица</span>
+                </div>
+                <div class="option">
+                    <span>Хомяк</span>
+                </div> -->
+            </div>
+        </section>
+        <footer>
+            <div class="total_que">
+                <!-- <span><p>1</p> of <p>5</p> Questions</span> -->
+            </div>
+            <button class="next_btn">Next question</button>
+        </footer>
+    </div>
+
+    <div class="result_box">
+        <div class="icon">
+            <i class="fas fa-crown"></i>
+        </div>
+        <div class="complete_text">Вы завершили квиз!</div>
+        <div class="score_text">
+           <!--  <span>и прости, ты получил только<p>2</p>из<p>5</p></span> -->
+        </div>
+        <div class="buttons">
+            <button class="restart">Сыграть заново</button>
+             <button class="quit">Выйти</button>
+        </div>
+    </div>
+    <script src="{% static 'games/quiz/questions.js' %}"></script>
+    <script src="{% static 'games/quiz/script.js' %}"></script>
+</body>
+</html>
