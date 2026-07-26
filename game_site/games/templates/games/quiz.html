@@ -78,7 +78,19 @@
              <button class="quit">Выйти</button>
         </div>
     </div>
+    <audio id="bgMusic" loop>
+    <source src="{% static 'games/sounds/quiz-bg.mp3' %}" type="audio/mpeg">
+</audio>
+
+<audio id="correctSound">
+    <source src="{% static 'games/sounds/correct-quiz.mp3' %}" type="audio/mpeg">
+</audio>
+
+<audio id="wrongSound">
+    <source src="{% static 'games/sounds/incorrect.mp3' %}" type="audio/mpeg">
+</audio>
     <script src="{% static 'games/quiz/questions.js' %}"></script>
     <script src="{% static 'games/quiz/script.js' %}"></script>
+    
 </body>
 </html>

@@ -1,13 +1,17 @@
-
+const clickSound = new Audio('/static/games/sounds/click.mp3');
+const matchSound = new Audio('/static/games/sounds/correct.mp3');
+const winSound = new Audio('/static/games/sounds/win.mp3');
+const wrongSound = new Audio('/static/games/sounds/incorrect.mp3');
 $(document).ready(function() {
     const pairs = [
-        { en: 'dog', ru: 'sobaka' },
-        { en: 'cat', ru: 'koshka' },
-        { en: 'sun', ru: 'solnce' },
-        { en: 'house', ru: 'dom' },
-        { en: 'book', ru: 'kniga' },
-        { en: 'fish', ru: 'riba' },
-        { en: 'bird', ru: 'ptica' }
+        { en: 'dog', ru: 'собака' },
+        { en: 'cat', ru: 'кошка' },
+        { en: 'sun', ru: 'солнце' },
+        { en: 'house', ru: 'дом' },
+        { en: 'book', ru: 'книга' },
+        { en: 'fish', ru: 'рыба' },
+        { en: 'bird', ru: 'птица' },
+        { en: 'deer', ru: 'олень'}
     ];
 
     const gameBoard = $('.game-board');
@@ -35,6 +39,7 @@ $(document).ready(function() {
     });
 
     $('.card').click(function() {
+        clickSound.play();
         if (!canClick || $(this).hasClass('flipped') || flippedCards.length >= 2) return;
 
         $(this).addClass('flipped');
@@ -48,10 +53,12 @@ $(document).ready(function() {
 
             setTimeout(function() {
                 if (match) {
+                    matchSound.play();
                     card1.add(card2).addClass('matched');
                     score += 10;
                     $('#score').text(score);
                 } else {
+                    wrongSound.play();
                     card1.removeClass('flipped');
                     card2.removeClass('flipped');
                 }
@@ -60,6 +67,7 @@ $(document).ready(function() {
                 canClick = true;
 
                 if ($('.matched').length === gameCards.length) {
+                    winSound.play(); 
                     setTimeout(function() {
                         alert('Win! Score: ' + score);
                     }, 500);
@@ -67,4 +75,7 @@ $(document).ready(function() {
             }, 800);
         }
     });
+    $(document).on('click', '#restartBtn', function() {
+    location.reload();
+});
 });

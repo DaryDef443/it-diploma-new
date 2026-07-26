@@ -7,8 +7,15 @@ const quiz_box = document.querySelector(".quiz_box");
 const timeCount = document.querySelector(".quiz_box .timer .timer_sec")
 const timeLine = document.querySelector(".quiz_box header .time_line")
 const timeOff = document.querySelector(".quiz_box header .time_text")
-
 const option_list = document.querySelector(".option_list");
+const bgMusic = document.getElementById('bgMusic');
+const correctSound = document.getElementById('correctSound');
+const wrongSound = document.getElementById('wrongSound');
+if (correctSound) correctSound.volume = 0.5;
+if (wrongSound) wrongSound.volume = 0.5;
+if (bgMusic) {
+    bgMusic.volume = 0.3;
+}
 
 // нажать на старт
 start_btn.onclick = () =>{
@@ -22,6 +29,7 @@ exit_btn.onclick = () =>{
 
 // нажать на продолжить
 continue_btn.onclick = () =>{
+    if (bgMusic) bgMusic.play();
     info_box.classList.remove("activeInfo");
     quiz_box.classList.add("activeQuiz");
     showQuestions(0);
@@ -44,6 +52,7 @@ const restart_quiz = result_box.querySelector(".buttons .restart")
 const quit_quiz = result_box.querySelector(".buttons .quit")
 
 restart_quiz.onclick = () => {
+    if (bgMusic) bgMusic.play();
     quiz_box.classList.add("activeQuiz")
     result_box.classList.remove("activeResult")
     let que_count = 0;
@@ -112,12 +121,14 @@ function optionSelected(answer){
     let correctAns = questions[que_count].answer;
     let allOptions = option_list.children.length;
     if(userAns == correctAns){
-        userScore += 1
+        userScore += 1;
+        if (correctSound) correctSound.play();
         console.log(userScore)
         answer.classList.add("correct")
         console.log("Правильный ответ")
         answer.insertAdjacentHTML("beforeend", tickIcon)
     }else{
+        if (wrongSound) wrongSound.play();
         answer.classList.add("incorrect")
         console.log("Неверный ответ")
         answer.insertAdjacentHTML("beforeend", crossIcon)
@@ -139,6 +150,10 @@ function optionSelected(answer){
 }
 
 function showResultBox(){
+    if (bgMusic) {
+        bgMusic.pause();
+        bgMusic.currentTime = 0;
+    }
     info_box.classList.remove("activeInfo");
     quiz_box.classList.remove("activeQuiz");
     result_box.classList.add("activeResult");

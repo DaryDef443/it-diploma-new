@@ -10,7 +10,17 @@ const orderText = document.getElementById('orderText')
 const orderIngredients = document.getElementById('orderIngredients')
 const progressFill = document.getElementById('progressFill')
 const customerEmoji = document.getElementById('customer')
-
+const bgMusic = new Audio('/static/games/sounds/kitchen-bg.mp3');
+bgMusic.loop = true;
+bgMusic.volume = 0.25;
+const catchSound = new Audio('/static/games/sounds/catch.mp3');
+const wrongSound = new Audio('/static/games/sounds/wrong.mp3');
+const completeSound = new Audio('/static/games/sounds/correct-quiz.mp3');
+const winSound = new Audio('/static/games/sounds/win.mp3');
+catchSound.volume = 0.8;
+wrongSound.volume = 0.8;
+completeSound.volume = 0.5;
+winSound.volume = 0.6;
 // рецепты
 const recipes = [
     {
@@ -44,7 +54,7 @@ const recipes = [
     {
         name: 'Fruit Bowl',
         customer: '😇',
-        text: 'Omlette for me!',
+        text: 'You have a new fruit salad, don`t you?',
         needs: ['🍓', '🍑', '🍒']
     }
 ]
@@ -67,6 +77,7 @@ let isGameRunning = false;
 
 //запуск игры
 function startGame() {
+    bgMusic.play();
     //сброс
     score = 0
     lives = 3
@@ -220,6 +231,7 @@ function processIngredient(emoji, element) {
 
     //проверка правильный ли элемент
     if(currentRecipe.needs.includes(emoji) && !collected.includes(emoji)) {
+        catchSound.play();
         //если ингредиент правильный
         collected.push(emoji)
         score += 20
@@ -250,6 +262,7 @@ function processIngredient(emoji, element) {
 
         // проверить все ли собрано
         if(collected.length === currentRecipe.needs.length) {
+            completeSound.play();
             score += 50
             scoreElement.textContent = score
             //эффект успеха
@@ -266,8 +279,10 @@ function processIngredient(emoji, element) {
             if(element.parentNode) element.remove()
         }, 300);
     } else {
+        wrongSound.play();
         //неправильный ингредиент
         lives--;
+        updateLives();
 
         //анимация ошибки
         element.style.color = '#ff0000'
@@ -307,6 +322,8 @@ function updateTimer() {
 
 // конец игры
 function gameOver() {
+    bgMusic.pause();
+    bgMusic.currentTime = 0;
     isGameRunning = false
 
     clearInterval(spawnInterval)
@@ -343,6 +360,10 @@ document.head.appendChild(shakeStyle)
 startBtn.addEventListener('click', startGame)
 // экран победы
 function victoryScreen() {
+    winSound.play();
+    bgMusic.pause();
+    bgMusic.currentTime = 0;
+    winSound.play();
     isGameRunning = false;
 
     clearInterval(spawnInterval);
@@ -350,7 +371,7 @@ function victoryScreen() {
     clearInterval(gameInterval);
 
     startBtn.disabled = false;
-    startBtn.textContent = '🍳 Играть снова';
+    startBtn.textContent = 'Играть снова';
 
     // Показать победный текст
     orderText.textContent = 'Все заказы выполнены!';

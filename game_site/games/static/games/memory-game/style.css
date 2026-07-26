@@ -6,60 +6,45 @@ body {
     align-items: center;
     justify-content: center;
     background: linear-gradient(135deg, #9aa1ff, #c1c9ff);
-    font-family: 'Bubblegum Sans', cursive;
+    font-family: 'Press Start 2P', cursive;
+    image-rendering: pixelated;
     overflow: hidden;
     position: relative;
 }
 
-.floating-background {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    pointer-events: none;
-    z-index: -1;
-}
-
-.floating-symbol {
-    position: absolute;
-    font-size: 40px;
-    opacity: 0.6;
-    animation: floatUp 8s linear infinite;
-}
-
-@keyframes floatUp {
-    0% { transform: translateY(100vh); opacity: 0; }
-    50% { opacity: 1; }
-    100% { transform: translateY(-10vh); opacity: 0; }
-}
 
 .game-title {
-    color: black;
-    font-size: 3em;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-    margin: 20px 0;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 28px;
+    font-weight: bold;
+    color: #4a3a5a;
+    text-shadow: 3px 3px 0 rgba(126, 56, 239, 0.3);
+    margin-bottom: 20px;
 }
 
+
 .game-container {
-    background: rgba(255, 255, 255, 0.9);
+    background: #faf5ff;
+    border: 6px solid #c392ff;
     padding: 30px;
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    border: 3px solid #fff;
-    position: relative;
+    box-shadow: 
+        inset 0 0 0 3px #e8d8f8,
+        0 8px 0 #8b50d0;
+    image-rendering: pixelated;
 }
+
 
 .game-board {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 15px;
+    gap: 18px;
     max-width: 600px;
     margin: 0 auto;
 }
 
 .card {
-    width: 120px;
-    height: 120px;
+    width: 100px;
+    height: 100px;
     perspective: 1000px;
     cursor: pointer;
 }
@@ -81,23 +66,34 @@ body {
     width: 100%;
     height: 100%;
     backface-visibility: hidden;
-    border-radius: 15px;
+    border: 3px solid #c392ff;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 50px;
+    font-family: 'Press Start 2P', cursive;
+    text-align: center;
+    padding: 8px;
+    image-rendering: pixelated;
 }
 
 .card-front {
-    background: linear-gradient(45deg, #ff758c, #ff7eb3);
-    color: white;
+    background: #f3b2ff;
+    color: #4a3a5a;
     transform: rotateY(180deg);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 1.4;
+    box-shadow: inset 0 0 0 2px #faf5ff;
 }
 
 .card-back {
-    background: linear-gradient(45deg, #a8edea, #fed6e3);
-    border: 3px solid #fff;
+    background: #c392ff;
+    color: #fff;
+    font-size: 28px;
+    border: 3px solid #7e38ef;
+    box-shadow: 
+        inset 0 0 0 2px #d0b0ff,
+        0 4px 0 #6a20c0;
 }
 
 .card.matched .card-inner {
@@ -111,11 +107,46 @@ body {
 }
 
 #score-panel {
-    margin: 20px;
+    margin-top: 40px;
     padding: 15px 30px;
-    background: rgba(255, 255, 255, 0.9);
-    border-radius: 10px;
-    font-size: 24px;
-    color: #ff758c;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background: #faf5ff;
+    border: 4px solid #c392ff;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 18px;
+    font-weight: bold;
+    color: #7e38ef;
+    box-shadow: 
+        inset 0 0 0 2px #e8d8f8,
+        0 4px 0 #8b50d0;
+    image-rendering: pixelated;
+}
+
+#score-panel span {
+    color: #4a3a5a;
+}
+
+.restart-btn {
+    display: block;
+    margin: 20px auto 0;
+    padding: 12px 25px;
+    background: #c392ff;
+    border: 4px solid #7e38ef;
+    color: #fff;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 13px;
+    cursor: pointer;
+    box-shadow: 0 5px 0 #6a20c0;
+    image-rendering: pixelated;
+    transition: all 0.1s;
+}
+
+.restart-btn:hover {
+    background: #b080e0;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 0 #6a20c0;
+}
+
+.restart-btn:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 0 #6a20c0;
 }

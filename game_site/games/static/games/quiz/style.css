@@ -11,6 +11,7 @@ body {
     background: #acabff;
     background-size: 30px 30px;
     background-position: 0 0, 0 15px, 15px -15px, -15px 0px;
+    background: linear-gradient(135deg, #9aa1ff, #c1c9ff);
     min-height: 100vh;
     display: flex;
     justify-content: center;
