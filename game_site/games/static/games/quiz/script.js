@@ -170,6 +170,19 @@ function showResultBox(){
         let scoreTag = '<span style="display:flex; justify-content:center; align-items:center; width:100%; padding: 0 20px;">К сожалению, ты получил только <p>' + userScore + '</p> из <p>' + questions.length + '</p></span>';
         scoreText.innerHTML = scoreTag;
     }
+
+    fetch('/api/save-score/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            score: userScore,
+            game: 'quiz',
+            player_name: 'Гость'
+        })
+    })
+    .then(function(r) { return r.json(); })
+    .then(function(data) { console.log('Рекорд сохранён:', data); })
+    .catch(function(err) { console.error('Ошибка:', err); });
 }
 
 function startTimer(time){

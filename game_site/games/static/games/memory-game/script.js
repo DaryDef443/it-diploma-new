@@ -67,15 +67,30 @@ $(document).ready(function() {
                 canClick = true;
 
                 if ($('.matched').length === gameCards.length) {
-                    winSound.play(); 
-                    setTimeout(function() {
-                        alert('Win! Score: ' + score);
+                    setTimeout(() => {
+                        alert('Поздравляю! Твой счёт: ' + parseInt($('#score').text()));
+                        saveMemoryScore();
                     }, 500);
                 }
             }, 800);
         }
     });
+
     $(document).on('click', '#restartBtn', function() {
     location.reload();
 });
+function saveMemoryScore() {
+    fetch('/api/save-score/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            score: parseInt($('#score').text()) || 0,
+            game: 'memory',
+            player_name: 'Гость'
+         })
+    })
+    .then(function(r) { return r.json(); })
+    .then(function(data) { console.log('Рекорд сохранён:', data); })
+    .catch(function(err) { console.error('Ошибка:', err); });
+}
 });

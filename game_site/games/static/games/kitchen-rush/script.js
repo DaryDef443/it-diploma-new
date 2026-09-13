@@ -74,6 +74,7 @@ let collected =[]; //уже собранные ингредиенты
 let gameInterval, timerInterval, spawnInterval;
 let gameSpeed = 2500; //начальная скорость падения (мс)
 let isGameRunning = false;
+let usedRecipes = [];
 
 //запуск игры
 function startGame() {
@@ -343,14 +344,25 @@ function gameOver() {
     }, 1000)
 
     timmerElement.style.color = '#333'
+    fetch('/api/save-score/', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ score: score, game: 'kitchen', player_name: 'Гость' })
+})
+.then(function(r) { return r.json(); })
+.then(function(data) { console.log('Сохранено:', data); })
+.catch(function(err) { console.error('Ошибка:', err); });
+
 }
+
+
 
 // shake анимация
 const shakeStyle = document.createElement('style')
 shakeStyle.textContent = `
     @keyframes shake {
         0%, 100% { transform: translateX(0); }
-        25%% { transform: translateX(-10px); }
+        25% { transform: translateX(-10px); }
         75% { transform: translateX(10px); }
     }
 `;
@@ -393,4 +405,13 @@ function victoryScreen() {
 
     timmerElement.style.color = '#ffd700';
     timmerElement.textContent = 'WIN!';
+
+   fetch('/api/save-score/', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ score: score, game: 'kitchen', player_name: 'Гость' })
+})
+.then(function(r) { return r.json(); })
+.then(function(data) { console.log('Сохранено:', data); })
+.catch(function(err) { console.error('Ошибка:', err); });
 }
